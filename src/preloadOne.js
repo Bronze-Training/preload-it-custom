@@ -22,13 +22,11 @@ export default function preloadOne(url, done) {
 		item.status = xhr.status
 
 		if (xhr.status == 404) {
-			item.blobUrl = item.size = null
+			item.response = null
 			item.error = true
 			this.onerror(item)
 		} else {
-			const blob = new Blob([event.target.response], { type: type })
-			item.blobUrl = URL.createObjectURL(blob)
-			item.size = blob.size
+			item.response = event.target.response
 			item.error = false
 		}
 		done(item)
